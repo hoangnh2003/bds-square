@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  app:
+    image: golang:1.24.3-alpine
+    container_name: bds-square-dev
+    working_dir: /app
+    volumes:
+      - .:/app
+      - go_cache:/go/pkg
+    command: sh -c "go run ./cmd/server/main.go"
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "8004:8002"
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: shopdevgo
+    ports:
+      - "33306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:7.0
+    container_name: redis
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql_data:
+  redis_data:
+  go_cache:
