@@ -12,5 +12,5 @@ var msg = map[int]string{
 	ErrCodeSuccess:       "success",
 	ErrCodeParamInvalid:  "Email is invalid",
 	ErrInvalidToken:      "Token is invalid",
-	ErrCodeUserHasExists: "User has already registered 123",
+	ErrCodeUserHasExists: "User has already registered",
 }

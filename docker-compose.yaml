@@ -2,18 +2,21 @@ version: '3.9'
 
 services:
   app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: golang:1.24.3-alpine
-    container_name: bds-square-dev
     working_dir: /app
     volumes:
       - .:/app
       - go_cache:/go/pkg
-    command: sh -c "go run ./cmd/server/main.go"
     depends_on:
       - mysql
       - redis
     ports:
       - "8004:8002"
+    tty: true
+    command: sh -c "air"
 
   mysql:
     image: mysql:8.0
@@ -39,3 +42,4 @@ volumes:
   mysql_data:
   redis_data:
   go_cache:
+ 

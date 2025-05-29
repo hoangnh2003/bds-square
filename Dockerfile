@@ -1,22 +1,15 @@
-# Dockerfile - chỉ dùng khi build image thật sự
-FROM golang:alpine AS builder
+# Dockerfile.dev
+FROM golang:1.24.3-alpine
 
-WORKDIR /build
+WORKDIR /app
+
+RUN apk add --no-cache bash curl
+RUN go install github.com/air-verse/air@latest
+
+COPY go.mod go.sum ./
+RUN go mod download
 
 COPY . .
 
-RUN go mod download
-RUN go build -o bds-square ./cmd/server
-
-FROM alpine
-
-WORKDIR /app
-RUN apk add --no-cache bash curl
-
-COPY --from=builder /build/bds-square .
-COPY ./config ./config
-COPY wait-for-it.sh .
-
-RUN chmod +x wait-for-it.sh
-
-ENTRYPOINT ["./wait-for-it.sh", "mysql:3306", "--", "./bds-square"]
+EXPOSE 8002
+ 
