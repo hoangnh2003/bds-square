@@ -5,7 +5,7 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
-  cmd = "go build -buildvcs=false -o app ./cmd/server"
+  cmd = "go build -gcflags='all=-N -l' -buildvcs=false -o app ./cmd/server/main.go"
   bin = "app"
   include_ext = ["go", "tpl", "tmpl", "html"]
 
