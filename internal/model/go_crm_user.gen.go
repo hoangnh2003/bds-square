@@ -6,7 +6,7 @@ package model
 
 const TableNameGoCrmUser = "go_crm_user"
 
-// GoCrmUser Account
+// GoCrmUser mapped from table <go_crm_user>
 type GoCrmUser struct {
 	UsrID            int32  `gorm:"column:usr_id;primaryKey;autoIncrement:true;comment:Account ID" json:"usr_id"`                // Account ID
 	UsrEmail         string `gorm:"column:usr_email;not null;comment:Email" json:"usr_email"`                                    // Email

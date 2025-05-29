@@ -15,3 +15,6 @@ debug:
 
 stop-debug:
 	@docker exec -it $(CONTAINER_ID) pkill -f 'dlv attach' || true
+
+migrate:
+	docker-compose exec app go run ./cmd/migrate/main.go
