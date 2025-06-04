@@ -7,7 +7,6 @@ import (
 
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
-	"gorm.io/gen"
 	"gorm.io/gorm"
 )
 
@@ -26,7 +25,7 @@ func InitMysql() {
 	global.Mdb = db
 
 	SetPool()
-	genTableDAO()
+	// genTableDAO()
 
 }
 
@@ -48,14 +47,14 @@ func SetPool() {
 	sqlDb.SetConnMaxLifetime(time.Duration(m.ConnMaxLifetime))
 }
 
-func genTableDAO() {
-	g := gen.NewGenerator(gen.Config{
-		OutPath: "./internal/model",
-		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
-	})
+// func genTableDAO() {
+// 	g := gen.NewGenerator(gen.Config{
+// 		OutPath: "./internal/model",
+// 		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
+// 	})
 
-	g.UseDB(global.Mdb)
-	g.GenerateAllTable()
+// 	g.UseDB(global.Mdb)
+// 	g.GenerateAllTable()
 
-	g.Execute()
-}
+// 	g.Execute()
+// }

@@ -12,6 +12,19 @@ import (
 	"bds-square-backend/internal/service"
 )
 
+import (
+	_ "github.com/go-sql-driver/mysql"
+)
+
+// Injectors from product.wire.go:
+
+func InitProductRouterHanlder() (*controller.ProductController, error) {
+	iProductRepository := repo.NewProductRepository()
+	iProductService := service.NewProductService(iProductRepository)
+	productController := controller.NewProductController(iProductService)
+	return productController, nil
+}
+
 // Injectors from user.wire.go:
 
 func InitUserRouterHanlder() (*controller.UserController, error) {

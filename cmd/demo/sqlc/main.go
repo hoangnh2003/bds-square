@@ -23,12 +23,7 @@ func main() {
 	// get List
 	ctx := context.Background()
 
-	// insert shop
-	err = dao.CreateShop(ctx, "shop 2")
-	if err != nil {
-		log.Fatal(err)
-	}
-	shopList, err := dao.GetShops(ctx)
+	shopList, err := dao.ListProducts(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}

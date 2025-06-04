@@ -1,3 +1,6 @@
+GOOSE_DRIVER ?= mysql
+GOOSE_DBSTRING = "root:root1234@tcp(127.0.0.1:33306)/shopdevgo"
+GOOSE_MIGRATION_DIR ?= sql/schema
 CONTAINER_ID := $(shell docker ps --filter "name=app" --format "{{.ID}}" | head -n 1)
 
 run:
@@ -19,3 +22,14 @@ stop-debug:
 
 migrate:
 	docker-compose exec app go run ./cmd/migrate/main.go
+
+db-up:
+	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) up
+
+db-down:
+	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) down
+
+db-reset:
+	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) reset
+
+.PHONY: db-up db-down db-reset

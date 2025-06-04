@@ -4,13 +4,13 @@
 
 package database
 
-type Product struct {
-	Productid   int32
-	Shopid      int32
-	Productname string
+type Order struct {
+	Orderid int32
+	Userid  int32
 }
 
-type Shop struct {
-	Shopid   int32
-	Shopname string
+type Product struct {
+	ID    int32
+	Name  string
+	Price string
 }
