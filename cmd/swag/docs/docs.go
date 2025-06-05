@@ -24,7 +24,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/products": {
+        "/user/products": {
             "get": {
                 "description": "Retrieve the list of all available products",
                 "consumes": [
@@ -85,7 +85,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/products/{id}": {
+        "/user/products/{id}": {
             "get": {
                 "description": "Retrieve a single product using its ID",
                 "consumes": [

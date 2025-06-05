@@ -13,9 +13,7 @@ func (pr *UserRouter) InitUserRouter(Router *gin.RouterGroup) {
 	// public router
 	userRouterPublic := Router.Group("/user")
 	{
-		// userRouterPublic.GET("/getUser", controller.NewUserController().GetUserByID)
 		userRouterPublic.GET("/register", userController.Register)
-		userRouterPublic.POST("/otp")
 	}
 
 	// private router
@@ -23,6 +21,7 @@ func (pr *UserRouter) InitUserRouter(Router *gin.RouterGroup) {
 	// userRouterPrivate.Use(limiter())
 	// userRouterPrivate.Use(authen())
 	// userRouterPrivate.Use(permission())
-
-	userRouterPrivate.GET("/get_info")
+	{
+		userRouterPrivate.GET("/get_info")
+	}
 }

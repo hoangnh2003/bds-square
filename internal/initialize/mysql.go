@@ -25,7 +25,6 @@ func InitMysql() {
 	global.Mdb = db
 
 	SetPool()
-	// genTableDAO()
 
 }
 
@@ -46,15 +45,3 @@ func SetPool() {
 	sqlDb.SetMaxOpenConns(m.MaxOpenConns)
 	sqlDb.SetConnMaxLifetime(time.Duration(m.ConnMaxLifetime))
 }
-
-// func genTableDAO() {
-// 	g := gen.NewGenerator(gen.Config{
-// 		OutPath: "./internal/model",
-// 		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface,
-// 	})
-
-// 	g.UseDB(global.Mdb)
-// 	g.GenerateAllTable()
-
-// 	g.Execute()
-// }

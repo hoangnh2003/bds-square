@@ -25,7 +25,7 @@ func NewProductController(productService service.IProductService) *ProductContro
 // @Accept       json
 // @Produce      json
 // @Success      200  {array}   database.Product
-// @Router       /products [get]
+// @Router       /user/products [get]
 func (pc *ProductController) GetList(c *gin.Context) {
 	products, code := pc.productService.ListProducts()
 	response.SuccessResponse(c, code, products)
@@ -39,7 +39,7 @@ func (pc *ProductController) GetList(c *gin.Context) {
 // @Produce      json
 // @Param        id   path      int  true  "Product ID"
 // @Success      200  {object}  database.Product
-// @Router       /products/{id} [get]
+// @Router       /user/products/{id} [get]
 func (pc *ProductController) GetByID(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
@@ -60,7 +60,7 @@ func (pc *ProductController) GetByID(c *gin.Context) {
 // @Produce      json
 // @Param        product  body      request.ProductCreateRequest  true  "Product to create"
 // @Success      201      {object}  map[string]int32  "Returns the ID of the created product"
-// @Router       /products [post]
+// @Router       /user/products [post]
 func (pc *ProductController) Create(c *gin.Context) {
 	var req request.ProductCreateRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -81,7 +81,7 @@ func (pc *ProductController) Create(c *gin.Context) {
 // @Param        id       path      int                          true  "Product ID"
 // @Param        product  body      request.ProductUpdateRequest   true  "Updated product info"
 // @Success      200      {object}  nil
-// @Router       /products/{id} [put]
+// @Router       /user/products/{id} [put]
 func (pc *ProductController) Update(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
@@ -108,7 +108,7 @@ func (pc *ProductController) Update(c *gin.Context) {
 // @Produce      json
 // @Param        id   path      int  true  "Product ID"
 // @Success      200  {string}  string  "Deleted successfully"
-// @Router       /products/{id} [delete]
+// @Router       /user/products/{id} [delete]
 func (pc *ProductController) Delete(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)

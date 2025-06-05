@@ -18,7 +18,7 @@
     "host": "localhost:8004",
     "basePath": "/v1",
     "paths": {
-        "/products": {
+        "/user/products": {
             "get": {
                 "description": "Retrieve the list of all available products",
                 "consumes": [
@@ -79,7 +79,7 @@
                 }
             }
         },
-        "/products/{id}": {
+        "/user/products/{id}": {
             "get": {
                 "description": "Retrieve a single product using its ID",
                 "consumes": [

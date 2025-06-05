@@ -11,7 +11,7 @@ type ProductRouter struct{}
 func (pr *ProductRouter) InitProductRouter(Router *gin.RouterGroup) {
 	productController, _ := wire.InitProductRouterHanlder()
 	// public router
-	productRouterPublic := Router.Group("/products")
+	productRouterPublic := Router.Group("/user/products")
 	{
 		productRouterPublic.GET("", productController.GetList)
 		productRouterPublic.GET("/:id", productController.GetByID)
@@ -21,4 +21,11 @@ func (pr *ProductRouter) InitProductRouter(Router *gin.RouterGroup) {
 	}
 
 	// private router
+	productRouterPrivate := Router.Group("/user/products")
+	// productRouterPrivate.Use(limiter())
+	// productRouterPrivate.Use(authen())
+	// productRouterPrivate.Use(permission())
+	{
+		productRouterPrivate.GET("/active_product")
+	}
 }

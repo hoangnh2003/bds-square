@@ -41,7 +41,7 @@ info:
   title: Swagger Example API
   version: "1.0"
 paths:
-  /products:
+  /user/products:
     get:
       consumes:
       - application/json
@@ -81,7 +81,7 @@ paths:
       summary: Create a new product
       tags:
       - products
-  /products/{id}:
+  /user/products/{id}:
     delete:
       consumes:
       - application/json

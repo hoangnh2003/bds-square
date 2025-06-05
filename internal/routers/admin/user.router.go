@@ -1,4 +1,4 @@
-package manage
+package admin
 
 import (
 	"bds-square-backend/internal/wire"
@@ -15,8 +15,7 @@ func (pr *UserRouter) InitUserRouter(Router *gin.RouterGroup) {
 	// public router
 	userRouterPublic := Router.Group("/admin/user")
 	{
-	    userRouterPublic.POST("/register", userController.Register)
-	    // userRouterPublic.POST("/otp")
+		userRouterPublic.POST("/register", userController.Register)
 	}
 
 	// private router
