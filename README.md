@@ -72,9 +72,9 @@ goose -dir sql/schema create name_table sql
 ### Migrate database:
 
 ```bash
-make up      # Thực thi tất cả các migration mới
-make down    # Rollback migration gần nhất
-make reset   # Xoá hết & migrate lại từ đầu
+make db-up      # Thực thi tất cả các migration mới
+make db-down    # Rollback migration gần nhất
+make db-reset   # Xoá hết & migrate lại từ đầu
 ```
 
 ---
