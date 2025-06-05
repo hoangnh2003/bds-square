@@ -4,10 +4,11 @@ import (
 	"bds-square-backend/global"
 	"fmt"
 
+	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
 
-func Run() {
+func Run() *gin.Engine {
 	LoadConfig()
 	fmt.Println("Loading config mysql", global.Config.Mysql.Dbname)
 	InitLogger()
@@ -16,5 +17,5 @@ func Run() {
 	InitRedis()
 
 	r := InitRouter()
-	r.Run(":8002")
+	return r
 }

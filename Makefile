@@ -32,4 +32,10 @@ db-down:
 db-reset:
 	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) reset
 
-.PHONY: db-up db-down db-reset
+sqlgen:
+	sqlc generate
+
+swag:
+	swag init -g  ./cmd/server/main.go -o ./cmd/swag/docs
+
+.PHONY: db-up db-down db-reset swag

@@ -1,0 +1,149 @@
+basePath: /v1
+definitions:
+  database.Product:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: string
+    type: object
+  request.ProductCreateRequest:
+    properties:
+      name:
+        example: Coca Cola
+        type: string
+      price:
+        example: "10000"
+        type: string
+    type: object
+  request.ProductUpdateRequest:
+    properties:
+      name:
+        example: Coca Chai
+        type: string
+      price:
+        example: "12000"
+        type: string
+    type: object
+host: localhost:8004
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve the list of all available products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/database.Product'
+            type: array
+      summary: Get list of products
+      tags:
+      - products
+    post:
+      consumes:
+      - application/json
+      description: Add a new product with name and price
+      parameters:
+      - description: Product to create
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/request.ProductCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Returns the ID of the created product
+          schema:
+            additionalProperties:
+              type: integer
+            type: object
+      summary: Create a new product
+      tags:
+      - products
+  /products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a product by its ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Deleted successfully
+          schema:
+            type: string
+      summary: Delete a product
+      tags:
+      - products
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a single product using its ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/database.Product'
+      summary: Get product by ID
+      tags:
+      - products
+    put:
+      consumes:
+      - application/json
+      description: Update product information by ID
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated product info
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/request.ProductUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Update an existing product
+      tags:
+      - products
+swagger: "2.0"
