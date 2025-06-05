@@ -20,9 +20,6 @@ debug:
 stop-debug:
 	@docker exec -it $(CONTAINER_ID) pkill -f 'dlv attach' || true
 
-migrate:
-	docker-compose exec app go run ./cmd/migrate/main.go
-
 db-up:
 	@GOOSE_DRIVER=$(GOOSE_DRIVER) GOOSE_DBSTRING=$(GOOSE_DBSTRING) goose -dir=$(GOOSE_MIGRATION_DIR) up
 
