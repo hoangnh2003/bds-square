@@ -13,7 +13,7 @@ func Run() *gin.Engine {
 	fmt.Println("Loading config mysql", global.Config.Mysql.Dbname)
 	InitLogger()
 	global.Logger.Info("config Log ok!!", zap.String("ok", "success"))
-	InitMysql()
+	InitMysqlC()
 	InitRedis()
 
 	r := InitRouter()

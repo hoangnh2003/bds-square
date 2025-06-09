@@ -1,6 +1,7 @@
 package repo
 
 import (
+	"bds-square-backend/global"
 	"bds-square-backend/internal/database"
 	"log"
 )
@@ -13,15 +14,19 @@ type IProductRepository interface {
 	DeleteProduct(id int32) error
 }
 
-type productRepository struct{}
+type productRepository struct {
+	sqlc *database.Queries
+}
 
 func NewProductRepository() IProductRepository {
-	return &productRepository{}
+	return &productRepository{
+		sqlc: database.New(global.Mdbc),
+	}
 }
 
 // CreateProduct implements IProductRepository.
 func (pr *productRepository) CreateProduct(arg database.CreateProductParams) (int32, error) {
-	result, err := Dao.CreateProduct(Ctx, arg)
+	result, err := pr.sqlc.CreateProduct(Ctx, arg)
 	if err != nil {
 		log.Println(">>> ERROR: CreateProduct():", err)
 		return 0, err
@@ -36,7 +41,7 @@ func (pr *productRepository) CreateProduct(arg database.CreateProductParams) (in
 
 // DeleteProduct implements IProductRepository.
 func (pr *productRepository) DeleteProduct(id int32) error {
-	err := Dao.DeleteProduct(Ctx, id)
+	err := pr.sqlc.DeleteProduct(Ctx, id)
 	if err != nil {
 		log.Println(">>> ERROR: DeleteProduct():", err)
 	}
@@ -45,7 +50,7 @@ func (pr *productRepository) DeleteProduct(id int32) error {
 
 // GetProductByID implements IProductRepository.
 func (pr *productRepository) GetProductByID(id int32) (database.Product, error) {
-	product, err := Dao.GetProduct(Ctx, id)
+	product, err := pr.sqlc.GetProduct(Ctx, id)
 	if err != nil {
 		log.Println(">>> ERROR: GetProductByID():", err)
 	}
@@ -53,8 +58,9 @@ func (pr *productRepository) GetProductByID(id int32) (database.Product, error) 
 }
 
 // ListProducts implements IProductRepository.
-func (r *productRepository) ListProducts() ([]database.Product, error) {
-	products, err := Dao.ListProducts(Ctx)
+func (pr *productRepository) ListProducts() ([]database.Product, error) {
+	// products, err := Dao.ListProducts(Ctx)
+	products, err := pr.sqlc.ListProducts(Ctx)
 	if err != nil {
 		log.Println(">>> ERROR: ListProducts():", err)
 	}
@@ -63,7 +69,7 @@ func (r *productRepository) ListProducts() ([]database.Product, error) {
 
 // UpdateProduct implements IProductRepository.
 func (pr *productRepository) UpdateProduct(arg database.UpdateProductParams) error {
-	err := Dao.UpdateProduct(Ctx, arg)
+	err := pr.sqlc.UpdateProduct(Ctx, arg)
 	if err != nil {
 		log.Println(">>> ERROR: UpdateProduct():", err)
 	}
