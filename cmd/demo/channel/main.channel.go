@@ -7,8 +7,8 @@ import (
 
 type Message struct {
 	OrderId string
-	Title string
-	Price int
+	Title   string
+	Price   int
 }
 
 func publisher(channel chan<- Message, orders []Message) {
