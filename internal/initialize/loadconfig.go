@@ -16,13 +16,9 @@ func LoadConfig() {
 	err := viper.ReadInConfig()
 
 	if err != nil {
-		panic(fmt.Errorf("Failed to read configuration %w \n", err))
+		panic(fmt.Errorf("failed to read configuration %w", err))
 	}
 
-	fmt.Println("Server Port: ", viper.GetInt("server.port"))
-	fmt.Println("Server Port: ", viper.GetInt("security.jwt.key"))
-
-	// var config Config
 	if err := viper.Unmarshal(&global.Config); err != nil {
 		fmt.Printf("Unable to decode configuration %v", err)
 	}

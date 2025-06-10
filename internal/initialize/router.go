@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"bds-square-backend/global"
+	"bds-square-backend/internal/middlewares"
 	"bds-square-backend/internal/routers"
 
 	"github.com/gin-gonic/gin"
@@ -22,6 +23,7 @@ func InitRouter() *gin.Engine {
 	// r.Use() // logging
 	// r.Use() // cross
 	// r.Use() // limiter global
+	r.Use(middlewares.CORSMiddleware())
 
 	adminRouter := routers.RouterGroupApp.Admin
 	userRouter := routers.RouterGroupApp.User
